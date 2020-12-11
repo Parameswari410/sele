@@ -1,4 +1,4 @@
-//Master
+//MasterParam
 package tests;
 
 import org.testng.Assert;
