@@ -4,19 +4,20 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.testng.annotations.Test;
 
-import base.TestBase;
 
-public class TestUtil extends TestBase{
+
+public class TestUtil  {
 
 
 	public static String path = "C:\\Users\\VICKY\\Desktop\\Liya\\Selenium\\PageObjectModel\\src\\main\\java\\testdata\\Data.xlsx";
 	public static  FileInputStream fin;
 	public static XSSFWorkbook wk;
 	public static XSSFSheet sh;
-	
 
 	public static String[][] getData() {
 
@@ -34,17 +35,23 @@ public class TestUtil extends TestBase{
 		}
 
 		int rowNum = sh.getLastRowNum();
-		int colNum = sh.getRow(0).getLastCellNum();
 
-		String[][] data = new String[rowNum][colNum];
+
+		String[][] data = new String[rowNum][sh.getRow(0).getLastCellNum()];
 		for(int i=0; i<rowNum; i++) {
 
+			XSSFRow row = sh.getRow(i+1);
+			int colNum = sh.getRow(0).getLastCellNum();
 			for(int k=0; k<colNum; k++) {
 
-				data[i][k]= sh.getRow(i+1).getCell(k).toString();
+				data[i][k]= row.getCell(k).toString();
 			}
 		}
-		
+
 		return data;
 	}
+
+	/*private static void main(String[] arg) {
+		getData();
+	}*/
 }
